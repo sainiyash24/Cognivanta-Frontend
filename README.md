@@ -3,7 +3,7 @@ Cognivanta-Frontend
 A full-stack Job Portal application built with React (Vite) for the frontend and Spring Boot for the backend.
 This project demonstrates real-world features like job posting, job applications, resume uploads/downloads, admin workflows, and REST API integration.
 *******************************************************************************************************************************************************************
-Key Highlights (What Recruiters Care About)
+Key Highlights 
 
 Full end-to-end job application workflow
 
