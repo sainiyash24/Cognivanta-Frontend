@@ -123,11 +123,9 @@ Clean code & folder structure
  **Author**
 
 **Yash Saini**
+
 Full Stack Developer
+
 Focused on building scalable, real-world applications using Java & React.
-
- 
-
-Handle file uploads securely
 
 Connect frontend and backend cleanly
