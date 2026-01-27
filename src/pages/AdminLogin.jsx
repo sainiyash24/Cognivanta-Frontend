@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -12,8 +14,12 @@ function AdminLogin() {
         password
       });
 
+      // ✅ store token
       localStorage.setItem("token", res.data.token);
-      alert("Login successful");
+
+      // ✅ redirect to admin dashboard
+      navigate("/admin");
+
     } catch {
       alert("Invalid credentials");
     }
@@ -23,13 +29,18 @@ function AdminLogin() {
     <div style={{ padding: "20px" }}>
       <h2>Admin Login</h2>
 
-      <input placeholder="Username"
-        onChange={e => setUsername(e.target.value)} />
+      <input
+        placeholder="Username"
+        onChange={e => setUsername(e.target.value)}
+      />
 
       <br /><br />
 
-      <input type="password" placeholder="Password"
-        onChange={e => setPassword(e.target.value)} />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={e => setPassword(e.target.value)}
+      />
 
       <br /><br />
 

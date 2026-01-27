@@ -17,7 +17,7 @@ function JobApplications() {
       await api.put(`/admin/applications/${id}/status`, { status });
       alert("Status updated");
 
-      // optional: update UI instantly
+      // Update UI instantly
       setApplications(prev =>
         prev.map(app =>
           app.id === id ? { ...app, status } : app
@@ -28,35 +28,27 @@ function JobApplications() {
     }
   };
 
-  // ✅ UPDATED DOWNLOAD LOGIC
   const downloadResume = async (id) => {
     try {
       const response = await api.get(
         `/admin/applications/${id}/resume`,
-        {
-          responseType: "blob", // 🔥 VERY IMPORTANT
-        }
+        { responseType: "blob" }
       );
 
-      // Create blob from PDF
       const blob = new Blob([response.data], {
         type: "application/pdf",
       });
 
-      // Create temporary download link
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = `resume-${id}.pdf`; // ✅ filename
+      link.download = `resume-${id}.pdf`;
       document.body.appendChild(link);
-
       link.click();
 
-      // Cleanup
       link.remove();
       window.URL.revokeObjectURL(url);
-
     } catch (error) {
       console.error(error);
       alert("Failed to download resume");
@@ -64,32 +56,43 @@ function JobApplications() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="container">
       <h2>Applications</h2>
 
-      {applications.map(app => (
-        <div
-          key={app.id}
-          style={{
-            border: "1px solid #ddd",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        >
-          <p><b>{app.name}</b> ({app.email})</p>
-          <p>Status: {app.status}</p>
+      {applications.length === 0 && <p>No applications found.</p>}
 
-          <button onClick={() => downloadResume(app.id)}>
-            Download Resume
-          </button>
+      {applications.map(app => (
+        <div key={app.id} className="card">
+          <p>
+            <b>{app.name}</b> ({app.email})
+          </p>
+
+          <span className={`status ${app.status}`}>
+            {app.status}
+          </span>
 
           <br /><br />
 
-          <button onClick={() => updateStatus(app.id, "SHORTLISTED")}>
+          <button
+            className="primary"
+            onClick={() => downloadResume(app.id)}
+          >
+            Download Resume
+          </button>
+
+          <button
+            className="success"
+            disabled={app.status === "SHORTLISTED"}
+            onClick={() => updateStatus(app.id, "SHORTLISTED")}
+          >
             Shortlist
           </button>
 
-          <button onClick={() => updateStatus(app.id, "REJECTED")}>
+          <button
+            className="danger"
+            disabled={app.status === "REJECTED"}
+            onClick={() => updateStatus(app.id, "REJECTED")}
+          >
             Reject
           </button>
         </div>

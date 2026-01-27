@@ -2,7 +2,6 @@ import { useState } from "react";
 import api from "../../api/api";
 
 function PostJob() {
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
@@ -18,7 +17,7 @@ function PostJob() {
         description,
         location,
         experience,
-        active
+        active,
       });
 
       alert("✅ Job posted successfully");
@@ -29,7 +28,6 @@ function PostJob() {
       setLocation("");
       setExperience("");
       setActive(true);
-
     } catch (error) {
       console.error(error);
       alert("❌ Failed to post job");
@@ -37,63 +35,66 @@ function PostJob() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px" }}>
-      <h2>Post New Job</h2>
+    <div className="container">
+      <div className="card">
+        <h2>Post New Job</h2>
 
-      <form onSubmit={handleSubmit}>
-
-        <input
-          type="text"
-          placeholder="Job Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-
-        <br /><br />
-
-        <textarea
-          placeholder="Job Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-
-        <br /><br />
-
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-        />
-
-        <br /><br />
-
-        <input
-          type="text"
-          placeholder="Experience (e.g. 1–3 Years)"
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-          required
-        />
-
-        <br /><br />
-
-        <label>
+        <form onSubmit={handleSubmit}>
           <input
-            type="checkbox"
-            checked={active}
-            onChange={(e) => setActive(e.target.checked)}
+            type="text"
+            placeholder="Job Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
           />
-          &nbsp; Active
-        </label>
 
-        <br /><br />
+          <br /><br />
 
-        <button type="submit">Post Job</button>
-      </form>
+          <textarea
+            placeholder="Job Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+
+          <br /><br />
+
+          <input
+            type="text"
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          />
+
+          <br /><br />
+
+          <input
+            type="text"
+            placeholder="Experience (e.g. 1–3 Years)"
+            value={experience}
+            onChange={(e) => setExperience(e.target.value)}
+            required
+          />
+
+          <br /><br />
+
+          <label>
+            <input
+              type="checkbox"
+              checked={active}
+              onChange={(e) => setActive(e.target.checked)}
+            />
+            &nbsp; Active
+          </label>
+
+          <br /><br />
+
+          <button type="submit" className="primary">
+            Post Job
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
