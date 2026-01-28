@@ -1,16 +1,25 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./JobCard.css";
 
 function JobCard({ job }) {
-  return (
-    <div style={{ border: "1px solid #ccc", padding: "15px", marginBottom: "10px" }}>
-      <h3>{job.title}</h3>
-      <p>{job.description}</p>
-      <p><b>Location:</b> {job.location}</p>
-      <p><b>Experience:</b> {job.experience}</p>
+  const navigate = useNavigate();
 
-      <Link to={`/apply/${job.id}`}>
-        <button>Apply</button>
-      </Link>
+  return (
+    <div className="job-card">
+      <h3>{job.title}</h3>
+
+      <p className="location">{job.location}</p>
+
+      <p className="desc">
+        {job.description.substring(0, 120)}...
+      </p>
+
+      <div className="job-footer">
+        <span className="exp">{job.experience}</span>
+        <button onClick={() => navigate(`/apply/${job.id}`)}>
+          Apply Now
+        </button>
+      </div>
     </div>
   );
 }

@@ -47,11 +47,11 @@ function Contact() {
         <h2>Contact Us</h2>
 
         <p style={{ marginTop: "20px" }}>
-          <b>Email:</b> contact@cognivanta.com
+          <b>Email:</b> ys972976@gmail.com
         </p>
 
         <p>
-          <b>Phone:</b> +91-XXXXXXXXXX
+          <b>Phone:</b> +91-9729760902
         </p>
 
         <p style={{ marginTop: "20px" }}>

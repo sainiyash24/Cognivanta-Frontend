@@ -80,7 +80,7 @@ function About() {
         />
 
         <p style={{ marginTop: "10px", fontWeight: "bold" }}>
-          CEO – Cognivanta
+          CEO – Yash Saini
         </p>
       </div>
     </div>

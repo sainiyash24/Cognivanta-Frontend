@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/api";
+import "./ApplyJob.css";
 
 function ApplyJob() {
   const { jobId } = useParams();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,43 +21,47 @@ function ApplyJob() {
 
     try {
       await api.post(`/applications/${jobId}/upload`, formData);
-      alert("Application submitted successfully");
-    } catch (err) {
-      alert("Failed to submit application");
+
+      // ✅ Navigate on success
+      navigate("/apply-success");
+    } catch (error) {
+      console.error("Failed to apply", error);
+      alert("Failed to apply");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: "20px" }}>
-      <h2>Apply for Job</h2>
+    <div className="apply-wrapper">
+      <div className="apply-card">
+        <h2>Apply for this Job</h2>
 
-      <input
-        placeholder="Name"
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
-      <br /><br />
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+          <input
+            type="file"
+            accept=".pdf"
+            onChange={(e) => setResume(e.target.files[0])}
+            required
+          />
 
-      <br /><br />
-
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => setResume(e.target.files[0])}
-        required
-      />
-
-      <br /><br />
-
-      <button type="submit">Submit</button>
-    </form>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

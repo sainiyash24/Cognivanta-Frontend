@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ApplySuccess from "./pages/ApplySuccess";
 
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -8,7 +9,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Jobs from "./pages/Jobs";
 import ApplyJob from "./pages/ApplyJob";
-import AdminLogin from "./pages/AdminLogin";
+import AdminLogin from "./pages/admin/AdminLogin";
 import ContactMessages from "./pages/admin/ContactMessages";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/apply/:jobId" element={<ApplyJob />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/apply-success" element={<ApplySuccess />} />
 
           {/* Admin Protected Routes */}
           <Route
