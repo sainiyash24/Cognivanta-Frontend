@@ -1,8 +1,13 @@
 import ceoImage from "../assets/ceo-placeholder.png";
+import { motion } from "framer-motion";
 
 function About() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
       style={{
         display: "flex",
         gap: "40px",
@@ -13,7 +18,13 @@ function About() {
       }}
     >
       {/* LEFT SIDE – CONTENT */}
-      <div style={{ flex: 2 }}>
+      <motion.div
+        initial={{ x: -40, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        style={{ flex: 2 }}
+      >
         <h1>About Us</h1>
 
         <p style={{ lineHeight: "1.7", marginTop: "20px" }}>
@@ -58,18 +69,25 @@ function About() {
         <p style={{ fontWeight: "bold", marginTop: "10px" }}>
           — Founder & CEO, Cognivanta
         </p>
-      </div>
+      </motion.div>
 
       {/* RIGHT SIDE – CEO IMAGE */}
-      <div
+      <motion.div
+        initial={{ x: 40, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3 }}
         style={{
           flex: 1,
           textAlign: "center",
         }}
       >
-        <img
+        <motion.img
           src={ceoImage}
           alt="Company CEO"
+          initial={{ scale: 0.95 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.6 }}
           style={{
             width: "180px",
             height: "220px",
@@ -82,8 +100,8 @@ function About() {
         <p style={{ marginTop: "10px", fontWeight: "bold" }}>
           CEO – Yash Saini
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

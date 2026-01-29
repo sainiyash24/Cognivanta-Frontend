@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import api from "../../api/api";
+import adminBg from "../../assets/admin-bg.jpg";
 import "./AdminLogin.css";
 
 function AdminLogin() {
@@ -14,32 +16,41 @@ function AdminLogin() {
     try {
       const res = await api.post("/auth/login", {
         username,
-        password
+        password,
       });
 
-      // ✅ Store token
       localStorage.setItem("token", res.data.token);
-
-      // ✅ Redirect to admin dashboard
       navigate("/admin");
-
     } catch {
       alert("Invalid credentials");
     }
   };
 
   return (
-    <div className="admin-login-wrapper">
-      <div className="admin-login-card">
+    <div
+      className="admin-login-wrapper"
+      style={{
+        backgroundImage: `linear-gradient(
+          rgba(0,0,0,0.65),
+          rgba(0,0,0,0.65)
+        ), url(${adminBg})`,
+      }}
+    >
+      <motion.div
+        className="admin-login-card"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <h2>Cognivanta Admin</h2>
-        <p className="subtitle">Sign in to continue</p>
+        <p className="subtitle">Secure sign in</p>
 
         <form onSubmit={handleLogin}>
           <input
             type="text"
             placeholder="Username"
             value={username}
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
 
@@ -47,13 +58,19 @@ function AdminLogin() {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
 
-          <button type="submit">Login</button>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            type="submit"
+          >
+            Login
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
